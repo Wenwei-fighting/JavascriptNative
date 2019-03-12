@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            float: left;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            width: 200px;
+            background: pink;
+            margin: 10px;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            console.log('文档加载完成');
+        }
+    </script>
+    <script defer>
+        console.log('script3执行')
+    </script>
+</head>
+<body>
+    <div id = "box1" class="box">请点击</div>
+    <div id = "box2" class="box">请双击</div>
+    <div id = "box3" class="box">鼠标移入</div>
+     <!--
+       1、JS严格区分大小写；
+       2、变量名规范：
+            （1）不能纯数字
+            （2）不能以数字开头
+            （3）名字严格区分大小写
+            （4）不能使用关键字和保留字
+            （5）可以使用符号
+       3、声明变量名关键字：var、let、function、class、const(常变量，只能读)、import；
+       4、调试打印方法：alert（），console.log（）；
+       5、常用鼠标DOM事件：
+            （1）onclick       单击事件
+            （2）ondblclick    双击事件
+            （3）onmouseenter    鼠标移入元素
+            （4）onmouseleave    鼠标移出元素
+       6、innerHTML  可以解析标签
+       7、innerText  纯文本
+       8、获取标签的属性如id、class、style、value等等，使用.属性或者['属性']操作
+       9、window.onload事件，通常检查文档内容或者图片是否加载完毕，需要等文档加载完才会执行。
+       10、defer属性，是script标签属性，使用defer标签将推迟script标签至页面加载完前一瞬间执行。
+       11、文档加载顺序由上往下，head ——> body，测试效果为先执行加了defer属性的script3，然后script2，最后才是window.onload
+     -->
+    <script>
+        let A = document.getElementById('box1');
+        let B = document.getElementById('box2');
+        let C = document.getElementById('box3')
+        A.onclick = function () {
+            alert('后台打印');
+            console.log('单击事件');
+        }
+        B.ondblclick = function () {
+            alert('后台打印');
+            console.log('双击事件');
+        }
+        C.onmouseenter = function () {
+            C.innerHTML = '鼠标进来了';
+            C.style.backgroundColor = 'red';
+        }
+        C.onmouseleave = function () {
+            C.innerHTML = '鼠标出去了';
+            C.style.backgroundColor = 'green';
+        }
+        console.log('script2执行');
+    </script>
+
+</body>
+</html>
