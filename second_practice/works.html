@@ -95,10 +95,12 @@
 
 
         let logon_state,
-            input_state,
+            input_state,        /*输入框动画状态标志*/
             wait = 5,
             num = 0;
-
+        /*
+          按钮点击事件
+         */
         logon.onclick = function () {
             if(logon_state != true){
                 input_animation('block',150);
@@ -121,7 +123,9 @@
 
             }
         }
-
+        /*
+            输入框动画
+        */
         function input_animation(input_display,input_width) {
             if(input_state != true){
                 input_text.style.display = input_display;
@@ -145,7 +149,9 @@
             }
 
         }
-
+        /*
+            动画过渡倒计时，禁止按钮使用
+        */
         function time() {
             if(wait == 0){
                 logon.removeAttribute('disabled');
@@ -153,23 +159,28 @@
             }
             else {
                 logon.setAttribute('disabled',true);
-
                 wait--;
                 setTimeout(function () {
                     time();
                 },1000)
             }
         }
-
+        /*
+            文本显示框动画
+        */
         function evenLog_animation(eventLog_heigth) {
             eventLog.style.height = eventLog_heigth + 'px';
         }
-
+        /*
+            写方法，将输入框的值写入文本显示框
+        */
         function wirte_text(click_number) {
-            eventLog.innerHTML += '<p>'+num+'、'+input_text.value+'</p>';
+            eventLog.innerHTML += '<p>'+click_number+'、'+input_text.value+'</p>';
             input_text.value = "";
         }
-
+        /*
+            输入框被输入时触发事件
+        */
         function logon_text() {
             logon.value = "发送";
         }
