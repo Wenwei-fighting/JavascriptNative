@@ -3,18 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .box{
+            height: 100px;
+            width: 100px;
+            margin: 10px;
+            background-color: paleturquoise;
+        }
+    </style>
 </head>
     <!--
         1、style.cssText   行内样式
-        2、
-        3、
-        4、
-        5、
-        6、
-        7、
-
+        2、获取元素
+            （1）document.getElementsByClassName()   class获取，返回类数组
+            （2）document.getElementById()           id获取
+            （3）document.getElementsByTagName()     元素标签名获取，返回类数组
+            （4）document.getElementsByName()        name属性获取，返回类数组
+            （5）document.querySelectorAll()         CSS选择器（如#box p）获取，返回类数组
+            （6）document.querySelector()            CSS选择器，返回找到的第一个符合条件的
+            （7）黑暗方法如果元素有id直接用(不推荐用，大量代码底下可读性较差)
+        3、数据类型：
+            （1）number      数值型
+            （2）string      字符串
+            （3）Boolean     布尔值
+            （4）undefined   undefined
+            （5）null        null
+            （6）object      对象
+            （7）symbol      符号（ES6）
+            关于检测数据类型，官方没有提供准确的方法检测数据类型，只能大概使用typeof,且不准确。
+        4、JSON对象   键值对存储，属性名可以自定义
+        5、Symbol()
     -->
 <body>
+    <div class="box">盒子1</div>
+    <div class="box" id="box2">盒子2</div>
+    <div class="box">盒子3</div>
+    <div class="box" name="boxname">盒子4</div>
+    <div class="box">盒子5</div>
+    <div class="box">盒子6</div>
 
+
+    <script>
+        let B1 = document.getElementById("box2"),
+            B2 = document.getElementsByClassName("box"),
+            B3 = document.getElementsByTagName("div"),
+            B4 = document.getElementsByName("boxname"),
+            B5 = document.querySelectorAll("body div"),
+            B6 = document.querySelector("body div");
+
+        console.log(B1.innerText);
+        console.log(B2[4].innerText);
+        console.log(B3[2].innerText);
+        console.log(B4[0].innerText);
+        console.log(B5[5].innerText);
+        console.log(B6.innerText);
+        console.log(box2.innerText);
+
+        for(i=0;i<6;i++){
+            console.log('遍历'+B5[i].innerText);
+        }
+
+        B1.innerHTML += '字符串叠加';
+        console.log(B1.innerText);
+    </script>
 </body>
 </html>

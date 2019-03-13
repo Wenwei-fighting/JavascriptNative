@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            margin: 0px;
+            padding: 0px;
+        }
+        #bigbox{
+            position: relative;
+            top: 50%;
+            left: 50%;
+            margin-top: 185px;
+            margin-left: -210px;
+            height: 370px;
+            width: 420px;
+            /*border: 1px solid red;*/
+        }
+        #box1{
+            position: absolute;
+            left: 50%;
+            margin-left: -160px;
+            clear: both;
+            height: 30px;
+            width: auto;
+            padding: 10px;
+            background-color: paleturquoise;
+            /*border:1px solid red;*/
+            border-radius: 15px;
+        }
+        #user{
+            float: left;
+            height: 30px;
+            width: 30px;
+            margin-right: 20px;
+            border-radius: 10px;
+            background-image: url("img/user_picture.jpg");
+            background-size: 60px;
+            background-position: 40% 50%;
+        }
+        #password{
+            display: none;  /**/
+            float: left;
+            height: 26px;
+            width: 0px;   /**/
+            margin: 0px;
+            padding: 0px;
+            background-color: pink;
+            /*border: 0px;*/
+            border-radius: 10px;
+            transition-property: width;
+            transition-duration: 5s;
+        }
+        #btn_logon{
+
+            float: left;
+            height: 25px;
+            width: 50px;
+            /*border: 1px solid black;*/
+            background-color: palevioletred;
+            border-radius: 10px;
+        }
+        #box2{
+            position: absolute;
+            left: 50%;
+            margin-top: 50px;
+            margin-left: -200px;
+            height: 0px;            /*300*/
+            width: 350px;
+            padding: 0px 10px;
+            background-color: chartreuse;
+            border-radius: 15px;
+            transition-duration: 5s;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="bigbox">
+        <div id="box1">
+            <div id="user"></div>
+            <input type="text" placeholder="请输入" id="password" oninput="logon_text()">
+            <input type="button" id="btn_logon" value="打开">
+        </div>
+        <div id="box2"></div>
+    </div>
+
+
+    <script>
+        let logon = document.getElementById('btn_logon'),
+            input_text = document.getElementById('password'),
+            eventLog = document.getElementById('box2');
+
+
+        let logon_state,
+            input_state,
+            wait = 5,
+            num = 0;
+
+        logon.onclick = function () {
+            if(logon_state != true){
+                input_animation('block',150);
+                time();
+                evenLog_animation(300);
+                logon_state = true;
+            }
+            else {
+                if (input_text.value){
+                    num++;
+                    wirte_text(num);
+                    logon.value = "关闭";
+                }
+                else {
+                    input_animation('none',0);
+                    evenLog_animation(0);
+                    time();
+                    logon_state = false;
+                }
+
+            }
+        }
+
+        function input_animation(input_display,input_width) {
+            if(input_state != true){
+                input_text.style.display = input_display;
+                logon.value = '打开中';
+                setTimeout(function () {
+                    input_text.style.width = input_width + 'px';
+                },1);
+                setTimeout(function () {
+                    logon.value = '关闭';
+                },5000);
+                input_state = true;
+            }
+            else {
+                    input_text.style.width = input_width + 'px';
+                    logon.value = '关闭中';
+                    setTimeout(function () {
+                        input_text.style.display = input_display;
+                        logon.value = '打开';
+                    },4900);
+                    input_state = false;
+            }
+
+        }
+
+        function time() {
+            if(wait == 0){
+                logon.removeAttribute('disabled');
+                wait = 5;
+            }
+            else {
+                logon.setAttribute('disabled',true);
+
+                wait--;
+                setTimeout(function () {
+                    time();
+                },1000)
+            }
+        }
+
+        function evenLog_animation(eventLog_heigth) {
+            eventLog.style.height = eventLog_heigth + 'px';
+        }
+
+        function wirte_text(click_number) {
+            eventLog.innerHTML += '<p>'+num+'、'+input_text.value+'</p>';
+            input_text.value = "";
+        }
+
+        function logon_text() {
+            logon.value = "发送";
+        }
+    </script>
+</body>
+</html>
