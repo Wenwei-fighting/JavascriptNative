@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <!--
+        1、字符串拼接  ${变量}，这样直接不需要分割后+
+        2、function   注意：匿名函数，没有名字的函数，匿名函数不能单独存在，必须是绑定DOM
+        3、function(x,y)    x,y是形参，可以设定默认值，当没有实参传给形参，默认值自动生效，如果没有默认值则是undefined
+        4、每个对象都有合法属性和自定义属性
+            自定义属性又分为：
+                （1）自定义标签属性  （寄存于标签内）
+                        访问  .getAttribute('属性名')
+                        设置  .setAttribute('属性名')
+                        删除  .removeAttribute('属性名')
+
+                （2）自定义属性    （寄存在JS中）
+                        访问或者设置    .属性名  <——>  ['属性名']    ！！这两个相同
+                        删除  delete
+
+        5、模板语法符号``,不再需要不断的字符串和加号拼接，直接    `字符串${变量}字符串`  ${}会自动帮你寻找变量
+        6、在if中默认为false的数值
+            （1）""
+            （2）0
+            （3）NaN
+            （4）false
+            （5）undefined
+            （6）null
+        7、三目运算   前提：if一定有且仅有  真假两个分支，并且每个分支 只有一个语句
+            格式：    判断条件  ？   判断为真的运行语句   ：  判断为假的运行语句
+        8、for循环命名label
+            格式：
+                   li：     //这个就是label,命名自定义符合命名规则就好
+                   for（i=0;i<10;i++）
+            作用：配合continue和break一起使用，直接后面跟label就可以决定跳出哪次循环
+            continue退出当前   break退出所有和return一样
+    -->
+<body>
+<script>
+    let obj = {
+        a:1,
+        b:2,
+        c:3
+    };
+
+    let a = "b",
+        b = "c",
+        c = "a",
+        d = 1;
+
+    let test_function = function (){
+        console.log(obj[a]);         /*   a变量保存了字符"b"，所以[a]就相当于["b"]     */
+        console.log(obj['b']);
+        console.log(obj.b);
+        if (obj[a]===obj['b']&&obj['b']===obj.b) {
+            console.log('他们都一样');
+        }
+    }();
+
+
+    /*   遍历对象属性   */
+    console.log('遍历obj对象属性');
+    function test() {
+        for(let i in obj){
+            console.log(`属性${i}:${obj[i]}`)
+        }
+    }
+    test();
+    delete obj.a;
+    console.log('已经删除a属性，再次遍历');
+    test();
+
+    /*  if以及三目运算  */
+    if(d < 5)
+        console.log(`${d}小于5`);
+    else
+        console.log(`${d}大于5`);
+
+    d<5 ? console.log(`${d}小于5`) : console.log(`${d}大于5`);
+
+    console.log(d<5 ? `${d}小于5` : `${d}大于5`);
+
+    /*  label尝试
+      当j=2时，直接跳出第一层for循环的循环，结果就是第二层for的j不会打印3，直接进入第一层for的下一次循环
+     */
+    li:
+    for (i=0;i<5;i++){
+        console.log(`i=${i}`);
+        for (j=0;j<4;j++){
+            console.log(`j=${j}`);
+            if (j==2){
+                console.log(`我已经j=${j}`);
+                continue li;
+            }
+
+        }
+    }
+
+</script>
+</body>
+</html>

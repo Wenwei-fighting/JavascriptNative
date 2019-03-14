@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+        }
+        #box{
+            position: absolute;
+            top: 50%;
+            margin-top: -250px;
+            left: 50%;
+            margin-left: -175px;
+            height: 500px;
+            width: 350px;
+            border: 1px solid rgb(232,230,232);
+        }
+        .top{
+            clear: both;
+            height: 50px;
+            width: 100%;
+            overflow: hidden;
+            background-color: rgb(238,237,239);
+        }
+        #picture{
+            float: left;
+            height: 40px;
+            width: 40px;
+            margin: 5px 5px;
+            border-radius: 50%;
+            /*background-color: pink;*/
+            background-image: url("img/timg.jpg");
+            background-size: 200%;
+            background-position: 22% 0;
+            cursor: pointer;
+        }
+        #input_box{
+            display: none;
+            float: left;
+            height: 30px;
+            width: 230px;
+            margin: 10px 5px;
+            /*background-color: paleturquoise;*/
+        }
+        #import{
+            float: left;
+            height: 26px;
+            width: 80%;
+            padding: 0px;
+        }
+        #send{
+            height: 30px;
+            width: 18%;
+        }
+        #unfold_btn{
+            float: right;
+            height: 30px;
+            width: 30px;
+            line-height: 30px;
+            text-align: center;
+            margin: 10px 10px;
+            /*border: 1px solid black;*/
+            border-radius: 50%;
+            background-color: rgb(206,204,206);
+            color: white;
+            cursor: pointer;
+        }
+        #chat_record{
+            height: 450px;
+            padding-top: 30px;
+            overflow: auto;
+        }
+        .record{
+            clear: both;
+            width: 100%;
+            height: 80px;
+            border-top:1px solid rgb(238,237,239);
+        }
+        img{
+            float: left;
+            height: 40px;
+            width: 40px;
+            margin: 10px 20px;
+            border-radius: 50%;
+        }
+        p{
+            float: left;
+            padding: 0px 20px;
+            word-wrap: break-word;
+            word-break: break-all;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div class="top">
+        <div id="picture"></div>
+        <div id="input_box">
+            <input type="text" id="import">
+            <input type="button" id="send" value="发表">
+        </div>
+        <div id="unfold_btn">+</div>
+    </div>
+    <div id="chat_record"></div>
+</div>
+<script>
+
+    let btn1 = gain_Dom('id','send'),
+        btn2 = gain_Dom('id','unfold_btn'),
+        inputBox = gain_Dom('id','input_box'),
+        user = gain_Dom('id','picture'),
+        chat_record_box = gain_Dom('id','chat_record');
+        Value = gain_Dom('id','import');
+
+    let picture_state = false,
+        unfold_btn_state = false,
+        num = 0,
+        picture_url_old,
+        picture_url_new = '';
+
+    btn2.onclick = function () {
+        if (unfold_btn_state){
+            inputBox.style.display = 'none';
+            unfold_btn_state = false;
+        } else{
+            inputBox.style.display = 'block';
+            unfold_btn_state = true;
+        }
+    };
+
+    user.onclick =function () {
+        picture_change(picture_state)
+    };
+
+    btn1.onclick = function () {
+        write();
+    };
+
+    function write() {
+        picture_url_joint();
+        if (!Value.value)
+            return;
+        chat_record_box.innerHTML += `<div>
+                                            <img src='${picture_url_old[0]}' alt="">
+                                            <p>${Value.value}</p>
+                                      </div>`;
+        num++;
+        for (let i=0;i<num;i++) {
+            document.querySelectorAll("#chat_record div")[i].className = 'record';
+        }
+        picture_url_new = [];
+    }
+
+    function picture_url_joint() {
+        picture_url_old = window.getComputedStyle(user,null).backgroundImage.split('/');
+        for (i=4;i<picture_url_old.length;i++){
+            if (i < (picture_url_old.length-1) ) {
+                picture_url_old[i] = picture_url_old[i] + '/';
+            }
+            picture_url_new += picture_url_old[i];
+        }
+        picture_url_old = picture_url_new.split('"');
+    }
+
+    function picture_change(state) {
+        if (state) {
+            user.style.backgroundImage = "url('img/timg.jpg')";
+            user.style.backgroundSize = '200%';
+            user.style.backgroundPosition = '22% 0px';
+            picture_state = false;
+        }else{
+            user.style.backgroundImage = "url('img/timg2.jpg')";
+            user.style.backgroundSize = '173%';
+            user.style.backgroundPosition = '89% -3px';
+            picture_state =true;
+        }
+    }
+
+
+
+    function gain_Dom(type,name) {
+        switch (type) {
+            case "id":
+                return document.getElementById(name);
+            case "name":
+                return document.getElementsByName(name);
+            case "classname":
+                return document.getElementsByClassName(name);
+            case "tagname":
+                return document.getElementsByTagName(name+'');
+        }
+    }
+</script>
+</body>
+</html>
