@@ -145,6 +145,7 @@
         picture_url_joint();
         if (!Value.value)
             return;
+        // console.log(picture_url_old[0]);
         chat_record_box.innerHTML += `<div>
                                             <img src='${picture_url_old[0]}' alt="">
                                             <p>${Value.value}</p>
@@ -158,7 +159,8 @@
 
     function picture_url_joint() {
         picture_url_old = window.getComputedStyle(user,null).backgroundImage.split('/');
-        for (i=4;i<picture_url_old.length;i++){
+
+        for (i=5;i<picture_url_old.length;i++){
             if (i < (picture_url_old.length-1) ) {
                 picture_url_old[i] = picture_url_old[i] + '/';
             }

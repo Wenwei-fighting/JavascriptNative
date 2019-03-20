@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="inputbox">
+    <p class="stairs">上楼方式1：<input type="text" placeholder="初始数量" v-model="TtepNumber_one"></p>
+    <p class="stairs">上楼方式2：<input type="text" placeholder="初始数量" v-model="TtepNumber_two"></p>
+    <p class="stairs">总楼梯数：<input type="text" placeholder="初始数量" v-model="sum"></p>
+    <button @click="TakeTheStairs">计算</button>
+    <locallist v-for="(item,index) in list"
+               v-bind:number="index+1"
+               v-bind:pointer="index">
+        <button @lookstyle="click_look">查看</button>
+    </locallist>
+</div>
+
+
+<script>
+    var locallist = {
+        props:['number','pointer'],
+        template:`<p @click="click_look">第{{number}}种<button>查看</button></p>`,
+        methods: {
+            click_look:function () {
+                this.$emit('lookstyle',this.pointer)
+            }
+        }
+    };
+
+    let vm = new Vue({
+        el:'#inputbox',
+        data:{
+            list:[],
+            TtepNumber_one:'',
+            TtepNumber_two:'',
+            sum:''
+        },
+        components:{
+            locallist:locallist
+        },
+        methods:{
+            TakeTheStairs:function () {
+
+                let TtepNumber_one = parseInt(this.TtepNumber_one),
+                    TtepNumber_two = parseInt(this.TtepNumber_two),
+                    sum = parseInt(this.sum),
+                    temp,
+                    num = 0;
+
+                this.list = [];
+
+                for ( i = 0 ; i <= (sum/TtepNumber_one) ; i++ ){
+                    for ( j = 0 ; j <= ((sum-TtepNumber_one*i)/TtepNumber_two) ; j++){
+                        temp = TtepNumber_one * i + TtepNumber_two * j;
+                        if (temp == sum) {
+                            num++;
+                            this.list.push([i,j]);
+                        }
+                    }
+                }
+                if(!num)
+                    return alert(-1);
+            },
+            click_look:function (pointer) {
+                alert(`${this.TtepNumber_one}阶上${this.list[pointer][0]}次，${this.TtepNumber_two}阶上${this.list[pointer][1]}次`);
+            }
+        }
+    })
+
+
+</script>
+</body>
+</html>

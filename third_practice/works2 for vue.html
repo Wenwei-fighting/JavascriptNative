@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作业2用vue实现</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <p>假如有一张纸厚度为1mm的纸，对折多少次可以到达珠穆朗玛峰的高度</p>
+        <input type="text" placeholder="珠穆朗玛峰的高度" v-model="myvalue">
+        <button @click="calculate_btn">计算</button>
+        <height_line v-for="(mountain_height,item) in list"
+                     v-bind:mountain="item+1"
+                     v-bind:mountain_height="mountain_height">
+        </height_line>
+    </div>
+    <script>
+        Vue.component('height_line',{
+            props:['mountain','mountain_height'],
+            template:`<p>折叠{{mountain}}次，高度为{{mountain_height}}</p>`
+        });
+
+        var vm = new Vue({
+            el:'#box',
+            data:{
+                myvalue:'',
+                list:[]
+            },
+            methods:{
+                calculate_btn:function () {
+
+                    let num = 0,
+                        i = 1,
+                        height;
+
+                    this.list = [];
+                    console.log(parseFloat(this.myvalue)*1000);
+                    /*for(i=1;i<parseFloat(this.myvalue)*1000;i=i*2){
+                        num++;
+                        (function (x) {
+                            height = x * 0.001;
+                        })(i);
+                        this.list.push([num,height]);
+                    }*/
+                    do {
+                        i = i*2;
+                        num++;
+                        (function (x) {
+                            height = x * 0.001;
+                        })(i);
+                        this.list.push(height);
+                        height = 0;
+                    }while (i<parseFloat(this.myvalue)*1000)
+
+                }
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作业4使用vue实现</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <p>幼兔：<input type="text" placeholder="请输入初始数量" v-model="smallrabbit_number"></p>
+        <p>小兔：<input type="text" placeholder="请输入初始数量" v-model="centerrabbit_number"></p>
+        <p>成兔：<input type="text" placeholder="请输入初始数量" v-model="bigrabbit_number"></p>
+        <button @click="onBtn">计算</button>
+        <outlist v-for="(item,index) in list"
+                 v-bind:number="index+1"
+                 v-bind:small_rabbit="item[0]"
+                 v-bind:center_rabbit="item[1]"
+                 v-bind:big_rabbit="item[2]">
+        </outlist>
+    </div>
+
+
+    <script>
+
+        Vue.component("outlist",{
+            props:['small_rabbit','center_rabbit','big_rabbit','number'],
+            template:`<p>第{{number}}月   幼兔{{small_rabbit}}对，小兔{{center_rabbit}}对，成兔{{big_rabbit}}对</p>`
+        });
+
+        var vm = new Vue({
+            el:"#box",
+            data:{
+                list:[],
+                smallrabbit_number:'',
+                centerrabbit_number:'',
+                bigrabbit_number:''
+            },
+            methods:{
+                onBtn:function () {
+                    let small_rabbit = parseInt(this.smallrabbit_number),
+                        center_rabbit = parseInt(this.centerrabbit_number),
+                        big_rabbit = parseInt(this.bigrabbit_number),
+                        time;
+
+                    for (time=1;time<9;time++){
+                        big_rabbit += center_rabbit;
+                        center_rabbit = small_rabbit;
+                        small_rabbit = big_rabbit;
+                        console.log(small_rabbit,center_rabbit,big_rabbit,time);
+                        this.list.push([small_rabbit,center_rabbit,big_rabbit])
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

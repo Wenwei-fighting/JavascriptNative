@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作业5原生JS实现</title>
+</head>
+<body>
+<div>
+    <p class="stairs">上楼方式1：<input type="text" placeholder="初始数量"></p>
+    <p class="stairs">上楼方式2：<input type="text" placeholder="初始数量"></p>
+    <p class="stairs">总楼梯数：<input type="text" placeholder="初始数量"></p>
+    <button onclick="TakeTheStairs()">计算</button>
+</div>
+<div id="prift_box"></div>
+<script>
+
+    let input_one = document.querySelectorAll(".stairs input"),
+        prift_box = document.getElementById("prift_box");
+
+
+    function TakeTheStairs() {
+
+        let TtepNumber_one = parseInt(input_one[0].value),
+            TtepNumber_two = parseInt(input_one[1].value),
+            sum = parseInt(input_one[2].value),
+            temp,
+            num = 0;
+
+        prift_box.innerHTML = '';
+
+        for ( i = 0 ; i <= (sum/TtepNumber_one) ; i++ ){
+            for ( j = 0 ; j <= ((sum-TtepNumber_one*i)/TtepNumber_two) ; j++){
+                temp = TtepNumber_one * i + TtepNumber_two * j;
+                if (temp == sum) {
+                    num++;
+                    (function priftData(styleone_number,styletwo_number,style_number) {
+                        prift_box.innerHTML += `<p>
+                                                   第${style_number}种方法：
+                                                   ${TtepNumber_one}阶走${styleone_number}次,
+                                                   ${TtepNumber_two}阶走${styletwo_number}次
+                                                </p>`
+                    })(i,j,num)
+                }
+            }
+        }
+        if(!num)
+            return alert(-1);
+    }
+</script>
+</body>
+</html>

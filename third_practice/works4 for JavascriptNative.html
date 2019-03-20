@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作业4原生JS实现</title>
+    <style>
+    </style>
+</head>
+<body>
+<div>
+    <p class="rabbit">幼兔：<input type="text" placeholder="初始数量"></p>
+    <p class="rabbit">小兔：<input type="text" placeholder="初始数量"></p>
+    <p class="rabbit">成兔：<input type="text" placeholder="初始数量"></p>
+    <button onclick="reproductive_cycle()">计算</button>
+</div>
+<div id="prift_box"></div>
+<script>
+
+    let rabbit_number = document.querySelectorAll(".rabbit input");
+    console.log(rabbit_number);
+
+    function reproductive_cycle() {
+
+        let small_rabbit = parseInt(rabbit_number[0].value),
+            center_rabbit = parseInt(rabbit_number[1].value),
+            big_rabbit = parseInt(rabbit_number[2].value),
+            time;
+
+        for (time=1;time<9;time++){
+            big_rabbit += center_rabbit;
+            center_rabbit = small_rabbit;
+            small_rabbit = big_rabbit;
+            console.log(small_rabbit,center_rabbit,big_rabbit);
+            prift_box.innerHTML += `<p>第${time}个月   幼兔数量：${small_rabbit}，小兔数量：${center_rabbit}，成兔数量：${big_rabbit}</p>`
+        }
+    }
+
+</script>
+</body>
+</html>

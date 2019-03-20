@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作业3使用vue实现</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <input type="text" placeholder="需要筹齐的总金额" v-model="money">
+        <button @click="rasie_money">计算</button>
+        <prift-list v-for="item in list"
+                    v-bind:one="item[0]"
+                    v-bind:two="item[1]"
+                    v-bind:five="item[2]"
+                    v-bind:number="item[3]">
+        </prift-list>
+    </div>
+
+    <script>
+
+        Vue.component("PriftList",{
+            props:['one','two','five','number'],
+            template:`<p>第{{number}}种：一元{{one}}张，二元{{two}}张，五元{{five}}张</p>`
+        });
+
+        let vm = new Vue({
+            el:"#box",
+            data:{
+                list:[],
+                money:''
+            },
+            methods:{
+                rasie_money:function () {
+
+                    let oneyuan,
+                        twoyuan,
+                        fiveyuan,
+                        sum,
+                        num = 0;
+
+                    this.list = [];
+
+                    for (oneyuan=1;oneyuan<=93;oneyuan++) {
+                        for (twoyuan=1;twoyuan<=47;twoyuan++){
+                            for (fiveyuan=1;fiveyuan<20;fiveyuan++) {
+                                sum = oneyuan * 1 + twoyuan * 2 + fiveyuan * 5;
+                                if (sum == parseInt(this.money)){
+                                    num++;
+                                    this.list.push([oneyuan,twoyuan,fiveyuan,num]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

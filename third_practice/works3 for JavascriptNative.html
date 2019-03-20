@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作业3原生JS实现</title>
+</head>
+<body>
+    <div id="box">
+        <input type="text" placeholder="需要筹齐的总金额">
+        <button onclick="rasie_money()">计算</button>
+    </div>
+    <div id="priftBox"></div>
+    <script>
+
+        let Value = document.getElementsByTagName('input'),
+            Box   = document.getElementById('box'),
+            PriftBox = document.getElementById('priftBox');
+
+         function rasie_money() {
+
+             let oneyuan,
+                 twoyuan,
+                 fiveyuan,
+                 sum,
+                 num = 0;
+
+             PriftBox.innerHTML = '';
+
+            for (oneyuan=1;oneyuan<=93;oneyuan++) {
+                for (twoyuan=1;twoyuan<=47;twoyuan++){
+                    for (fiveyuan=1;fiveyuan<20;fiveyuan++) {
+                        sum = oneyuan * 1 + twoyuan * 2 + fiveyuan * 5;
+                        if (sum == parseInt(Value[0].value)){
+                            num++;
+                            (function add_P(x,y,z,c) {
+                                PriftBox.innerHTML += `<p>第${c}种：一元${x}张，两元${y}张，五元${z}张</p>`;
+/*                                console.log(`第${c}种`);
+                                console.log(`一元${x}张，两元${y}张，五元${z}张`);*/
+                            })(oneyuan,twoyuan,fiveyuan,num)
+                        }
+                    }
+                }
+            }
+         }
+
+         // rasie_money();
+    </script>
+</body>
+</html>

@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="57ab45a4-9b11-420a-87b1-956016a81604" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/third.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/works1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../second_practice/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../second_practice/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../second_practice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../second_practice/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../second_practice/.idea/第二节课练习.iml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/works2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/works1.html" beforeDir="false" afterPath="$PROJECT_DIR$/works1.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -19,21 +16,30 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/third.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1368">
+            <state relative-caret-position="1848">
               <caret line="77" column="31" selection-start-line="77" selection-start-column="31" selection-end-line="77" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/works1.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-592">
+            <state relative-caret-position="3456">
               <caret line="144" column="28" selection-start-line="144" selection-start-column="28" selection-end-line="144" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/works2.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -55,6 +61,7 @@
       <list>
         <option value="$PROJECT_DIR$/third.html" />
         <option value="$PROJECT_DIR$/works1.html" />
+        <option value="$PROJECT_DIR$/works2.html" />
       </list>
     </option>
   </component>
@@ -70,6 +77,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -81,13 +89,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="F:/VuePractice" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -103,15 +110,19 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.works1.html">
+  <component name="RunManager" selected="JavaScript Debug.works2.html">
     <configuration name="third.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63341/third_practice/third.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="works1.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63341/third_practice/works1.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
+    <configuration name="works2.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63341/third_practice/works2.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.works2.html" />
         <item itemvalue="JavaScript Debug.works1.html" />
         <item itemvalue="JavaScript Debug.third.html" />
       </list>
@@ -128,22 +139,22 @@
       <option name="presentableId" value="Default" />
       <updated>1552486012056</updated>
       <workItem from="1552486013276" duration="28267000" />
+      <workItem from="1552572634915" duration="68000" />
+      <workItem from="1552897871002" duration="167000" />
+      <workItem from="1552898062181" duration="8000" />
+      <workItem from="1552898218444" duration="9000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28267000" />
+    <option name="totallyTimeSpent" value="28519000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24973656" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -151,6 +162,10 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -162,15 +177,22 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/third.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1368">
+        <state relative-caret-position="1848">
           <caret line="77" column="31" selection-start-line="77" selection-start-column="31" selection-end-line="77" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/works1.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-592">
+        <state relative-caret-position="3456">
           <caret line="144" column="28" selection-start-line="144" selection-start-column="28" selection-end-line="144" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/works2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
         </state>
       </provider>
     </entry>

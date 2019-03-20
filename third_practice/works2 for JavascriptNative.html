@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作业2原生JS实现</title>
+</head>
+<body>
+    <div id="box">
+        <p>假如有一张纸厚度为1mm的纸，对折多少次可以到达珠穆朗玛峰的高度</p>
+        <input type="text" placeholder="珠穆朗玛峰的高度" id="inputbox">
+        <button onclick="calculateHeight()">计算</button>
+    </div>
+    <div id="prift_box"></div>
+    <script>
+        let input_box = document.getElementById("inputbox"),
+            box = document.getElementById("box"),
+            PriftBox = document.getElementById("prift_box");
+
+        function calculateHeight() {
+            let i = 1,
+                num = 0,
+                calculateheight;
+
+            PriftBox.innerHTML = "";
+            do {
+                i = i*2;
+                num++;
+                (function height(x) {
+                    calculateheight = x * 0.001;
+                    PriftBox.innerHTML += `<p>折叠第${num},高度为${calculateheight}</p>`;
+                })(i)
+            }while (i<parseFloat(input_box.value)*1000)
+
+        }
+    </script>
+</body>
+</html>
