@@ -13,8 +13,9 @@
     <button @click="TakeTheStairs">计算</button>
     <locallist v-for="(item,index) in list"
                v-bind:number="index+1"
-               v-bind:pointer="index">
-        <button @lookstyle="click_look">查看</button>
+               v-bind:pointer="index"
+               @lookstyle="click_look">
+        <!--<button @lookstyle="click_look"></button>  出问题的代码出在这里，我将监听事件放在button-->
     </locallist>
 </div>
 
