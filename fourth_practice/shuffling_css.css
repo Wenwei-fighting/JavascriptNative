@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+body{
+    margin: 0px;
+    padding: 0px;
+}
+#Box{
+    position: relative;
+    top: 100px;
+    left: 50%;
+    margin-left: -400px;
+    height: 450px;
+    width: 800px;
+    border: 0.0625rem solid gray;
+}
+.text{
+    height: 30px;
+    width: 100%;
+    margin: 0px;
+    background-color: rgba(0,0,0,0.4);
+    color: pink;
+    text-align: center;
+    line-height: 30px;
+    /*opacity: 0.2;*/
+}
+#top{
+    position: absolute;
+    top: 0px;
+}
+#bottom{
+    position: absolute;
+    bottom: 0px;
+}
+img{
+    height: 450px;
+}
+.sliding_btn{
+    position: absolute;
+    top: 50%;
+    margin-top: -25px;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    background-color: rgba(0,0,0,0.4);
+    cursor: pointer;
+}
+.function_btn{
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    width: 85px;
+    line-height: 40px;
+    text-align: center;
+    background-color: rgb(200,200,200);
+    color: rgb(80,80,80);
+    font-weight: bold;
+    cursor: pointer;
+}
+#once{
+    margin-left: -90px;
+}
+#right_btn{
+    right: 0;
+}
+#picture_view{
+    width: 800px;
+    overflow: hidden;
+}
+ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    clear: both;
+    width: 4000px;
+    transition: margin-left 2s ;
+}
+li{
+    float: left;
+}
+.clickon{
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    width: 85px;
+    line-height: 40px;
+    text-align: center;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}

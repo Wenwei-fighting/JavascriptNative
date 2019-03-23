@@ -2,9 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>轮播图JS原生</title>
+    <link rel="stylesheet" href="shuffling_css.css" type="text/css">
 </head>
 <body>
-$END$
+    <div id="Box">
+        <div>
+            <p class="text" id="bottom">图片一</p>
+            <p class="text" id="top">1/5</p>
+        </div>
+        <div>
+            <span class="sliding_btn" id="left_btn" onclick="left_switch()"><</span>
+            <span class="sliding_btn" id="right_btn" onclick="right_switch()">></span>
+            <div class="clickon" id="once" onclick="playmode(this)">正常模式</div>
+            <div class="function_btn" id="circulation" onclick="playmode(this)">循环模式</div>
+        </div>
+        <div id="picture_view">
+            <ul>
+                <li><img src="img/1.jpg" alt=""></li>
+                <li><img src="img/2.jpg" alt=""></li>
+                <li><img src="img/3.jpg" alt=""></li>
+                <li><img src="img/4.jpg" alt=""></li>
+                <li><img src="img/5.jpg" alt=""></li>
+            </ul>
+        </div>
+    </div>
+    <script src="shuffling_function.js"></script>
 </body>
 </html>
