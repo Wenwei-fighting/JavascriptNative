@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练手1 JS原生实现</title>
+    <link rel="stylesheet" href="works1_css.css" type="text/css">
+</head>
+<body>
+<div id="Box">
+    <div>
+        <input type="text" value="hello" disabled="disabled">
+        <button>修改</button>
+    </div>
+    <div>
+        <input type="text" value="hello" disabled="disabled">
+        <button>修改</button>
+    </div>
+    <div>
+        <input type="text" value="hello" disabled="disabled">
+        <button>修改</button>
+    </div>
+</div>
+<script>
+
+    let list_btn   = document.getElementsByTagName("button"),
+        list_input = document.getElementsByTagName("input");
+
+    /*   BUG出现，for中i使用var来定义，最终处理使用let后BUG修复
+
+         问题：
+         使用var定义for中的i，导致onclick事件点击触发时，list_btn[i].state
+         无法读取，可是在控制台中可以查询到这个属性，我第一时间想到的是作用域
+         和闭包的问题，因为在for中注册事件，当事件触发，for循环已经结束，i变量
+         已经消亡，所以onclick无法读取到i。
+
+         解决办法：
+         我首先使用闭包的问题，通过(function xxx(y))(i)使函数接收我的i变量，问题是
+         这样会使事件自执行，无法达到我点击才执行的一个预期效果。所以否决。
+
+         后来我偶尔间想到let和var的区别，在ES6中出现了let，我通过百度查询，查询到
+         let是用于声明局部变量，与var用法类似，var是全局的，但是let所声明的变量，
+         只在let命令所在的代码块内有效，而且有暂时性死区的约束。
+
+         在ES6之前，我们都是用var来声明变量，而且JS只有函数作用域和全局作用域，没有
+         块级作用域，所以{}限定不了var声明变量的访问范围。ES6新增的let，可以声明块级
+         作用域的变量。
+
+         然后JS中的for循环体比较特殊，每次执行都是一个全新的独立的块作用域，用let声明
+         的变量传入到 for循环体的作用域后，不会发生改变，不受外界的影响。从而达到不会当
+         for中的执行语句，当for循环结束才开始，而是每次执行将传入执行语句中。
+
+         参考资料：https://www.cnblogs.com/fly_dragon/p/8669057.html
+
+         而且发现一个意外的问题，input在行内样式设置disabled无论是什么值都无法启用，存在
+         disabled就是禁用状态，但是使用JS设置disabled值为false时却意外可以将标签变为启用
+         状态，经过百度查询也无法得知原理是为什么？？？？？？？
+
+    */
+
+    for (let i = 0 ; i < list_btn.length ; i++) {
+        list_btn[i].state = false;
+        console.log(list_btn[i].state);
+        list_btn[i].onclick = function () {
+            list_btn[i].state = !list_btn[i].state;
+            console.log(list_btn[i].state);
+            if (list_btn[i].state) {
+                list_input[i].disabled = false;
+                list_btn[i].className = "unlock";
+                list_btn[i].innerText = "确认";
+            }else {
+                list_input[i].disabled = true;
+                list_btn[i].className = "";
+                list_btn[i].innerText = "修改";
+            }
+        }
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练手2 JS原生实现</title>
+    <link rel="stylesheet" href="works2_css.css" type="text/css">
+</head>
+<body>
+<div id="Box">
+    <form action="">
+        <div><label><input name="Fruit" type="checkbox" value="" />苹果</label></div>
+        <div><label><input name="Fruit" type="checkbox" value="" />桃子</label></div>
+        <div><label><input name="Fruit" type="checkbox" value="" />香蕉</label></div>
+        <div><label><input name="Fruit" type="checkbox" value="" />西瓜</label></div>
+        <div><label><input name="Fruit" type="checkbox" value="" />草莓</label></div>
+        <div><label><input name="Fruit" type="checkbox" value="" />木瓜</label></div>
+        <div id="all"><label><input name="Fruit" type="checkbox" value="" />全部 </label></div>
+    </form>
+</div>
+
+<script>
+
+    let div_list = document.querySelectorAll("#Box div"),
+        input_list = document.getElementsByTagName("input");
+
+    let BackgroundColor_list = ["rgb(203,203,203)","rgb(237,237,237)","rgb(152,152,152)","rgb(203,203,203)","rgb(237,237,237)","rgb(152,152,152)"],
+        num = 0,
+        allcheck_state = false;
+
+    backgroundcolor_change();
+
+    function backgroundcolor_change() {
+        for ( let i = 0; i < BackgroundColor_list.length ; i++ ){
+            div_list[i].style.backgroundColor = BackgroundColor_list[i]
+        }
+    }
+
+    for ( let j = 0 ; j < input_list.length - 1 ; j++ ){
+        input_list[j].onclick = function () {
+            input_list[j].checked ? num++ :num--;
+            input_list[input_list.length - 1].checked = num === input_list.length - 1 ? true : false;
+        }
+    }
+
+    input_list[input_list.length - 1].addEventListener("click",function () {
+        if (input_list[input_list.length - 1].checked){
+            for (let j = 0 ; j < input_list.length - 1 ; j++)
+                input_list[j].checked = true
+        }else {
+            for (let j = 0 ; j < input_list.length - 1 ; j++)
+                input_list[j].checked = false
+        }
+
+    })
+
+
+</script>
+</body>
+</html>

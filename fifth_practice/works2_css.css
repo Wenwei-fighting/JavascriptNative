@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+#Box{
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    margin-left: -350px;
+    display: inline-block;
+    padding: 15px 0px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+#Box div{
+    line-height: 50px;
+    width: 700px;
+}
+
+input{
+    margin: 0px 10px;
+    size: 20px;
+}
+#Box #all{
+    margin-top: 20px;
+}

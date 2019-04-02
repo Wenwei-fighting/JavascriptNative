@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练手3 JS原生实现</title>
+    <link rel="stylesheet" href="works3_css.css" type="text/css">
+</head>
+<body>
+<div id="Box">
+    <ul>
+        <li>
+            <h3>同事</h3>
+            <span>小埋</span>
+            <span>小红</span>
+            <span>小明</span>
+        </li>
+        <li>
+            <h3>好友</h3>
+            <span>吃货</span>
+            <span>人才</span>
+            <span>咸鱼</span>
+        </li>
+        <li>
+            <h3>同学</h3>
+            <span>翠花</span>
+            <span>大傻</span>
+            <span>超人</span>
+        </li>
+    </ul>
+</div>
+<script>
+
+    let Box = document.getElementById("Box"),
+        liList = Box.getElementsByTagName("li"),
+        titleList = Box.getElementsByTagName("h3");
+
+    let lastIndex = -1;
+
+    for (let i = 0; i < titleList.length; i++){
+        titleList[i].onclick = function () {
+            if (lastIndex !== -1){
+                liList[lastIndex].style.height = "30px";
+                if (lastIndex === i) {
+                    liList[i].style.height = "30px";
+                    lastIndex = -1;
+                    return;
+                }
+            }
+            liList[i].style.height = "auto";
+            lastIndex = i;
+        }
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练手1 Vue实现</title>
+    <link rel="stylesheet" href="works1_css.css" type="text/css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="Box">
+    <div v-for="(item,index) of list" :key="item.number">
+        <myinput :value="item.input_text" :disabled="item.btn_disabled"></myinput>
+        <outbutton @change_disabled="btn_click" :number="index"></outbutton>
+    </div>
+</div>
+
+<script>
+    /*
+        vue的递归组件，需要达到控制递归组件中的任意一个，但是无法确定是哪个，导致一控就是全部。
+
+        想到是否可以递归的数组变成对象数组去达到呢？？最后通过绑定数据获取index值，
+        父组件中的data的list变成对象数组，子组件相关绑定数据变为item.属性，
+        通过触发事件执行函数中$emit反馈index值和自己子组件的data的对象给父组件，
+        触发监听函数执行，操作list，最后重新渲染页面，达到单个控制递归组件的其中一个。
+
+
+    * */
+    var myinput = {
+        template:`<input type="text">`
+    };
+
+
+    var outbutton = {
+        props:["number"],
+        data:function(){
+            return{
+                btn_value : "修改",
+                obj:{
+                    number: 0,
+                    input_text: "第一个",
+                    btn_disabled: true,
+                    btn_style: {
+                        backgroundColor: "black",
+                        color: "white"
+                    }
+
+                }
+            }
+        },
+        template: `<button @click="btn_click" ref="name">{{btn_value}}</button>`,
+        methods: {
+            btn_click:function () {
+                this.$refs.name.className = this.obj.btn_disabled ? "unlock" : "";
+                this.obj.btn_disabled = !this.obj.btn_disabled;
+                this.obj.number = this.number;
+                this.btn_value = this.obj.btn_disabled ? "修改" : "确认";
+                console.log(this.obj.btn_disabled);
+                console.log(this.obj.btn_content = "修改");
+                this.$emit("change_disabled",[this.obj, this.number])
+            }
+        }
+    };
+
+    var vm = new Vue({
+        el:"#Box",
+        data:{
+            list: [{
+                number: 0,
+                input_text: "第一个",
+                btn_disabled: true,
+                btn_style: {
+                    backgroundColor: "white",
+                    color: "black"
+                }},{
+                number: 1,
+                input_text: "第二个",
+                btn_disabled: true,
+                btn_style: {
+                    backgroundColor: "white",
+                    color: "black"
+                }},{
+                number: 2,
+                input_text: "第三个",
+                btn_disabled: true,
+                btn_style: {
+                    backgroundColor: "white",
+                    color: "black"
+                }}]
+        },
+        methods: {
+            btn_click:function (data_list) {
+                this.list.splice(data_list[1], 1, data_list[0])
+            }
+        },
+        components:{
+            outbutton: outbutton,
+            myinput: myinput
+        }
+    })
+
+</script>
+</body>
+</html>

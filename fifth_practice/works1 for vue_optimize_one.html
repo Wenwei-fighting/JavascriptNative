@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练手1 Vue实现（优化1）</title>
+    <link rel="stylesheet" href="works1_css.css" type="text/css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+
+<div id="Box">
+    <div v-for="(item,index) in 4">
+        <!-- 绑定clickindex、index、x变量 -->
+        <component-b :clickindex="clickindex" :index="index" :x="x"></component-b>
+        <!-- 绑定handlechangeinputstate监听事件 -->
+        <component-a v-on:handlechangeinputstate="handlechangeinputstate(index)" :btn_index="index"></component-a>
+    </div>
+</div>
+
+<script>
+    /*
+        整个逻辑是：
+            A组件是button
+            B组件是input
+
+            通过点击A组件，触发handleChangeType函数，并将递归的index传参
+                    handleChangeType函数：
+                    更改组件的data中btnName的值，达到重新渲染，并且通过$emit触发函数将index传值给父组件
+
+            触发父组件的handlechangeinputstate监听事件，index值实参传给形参，
+            改变clickindex、x的值
+
+            因为B组件props绑定了clickindex、index和x这三个变量，watch侦听器侦听x值，
+            因为x值改变触发侦听器的方法关于x值的函数。
+                    侦听器x值的函数：
+                    判断指针值是否相同，相同则渲染没有disabled属性的ipnut，不同则渲染
+                    含有disabled属性的input
+
+    * */
+
+
+    let componentA = {
+        // 组件A模板为<button></button> 绑定点击事件handleChangeType函数
+        template: `<button @click="handleChangeType">{{ btnName }}</button>`,
+        props:["btn_index"],
+        data:function(){
+            return {
+                btnName: '修改'
+            }
+        },
+        methods: {
+            //函数传入递归组件当前的指针
+            handleChangeType(index){
+                //修改btnName的值，并且将index传值给父组件
+                if (this.btnName == '修改') {
+                    this.btnName = '确认';
+                    // this.$emit('handlechangeinputstate',index)
+                } else {
+                    this.btnName = '修改';
+                }
+                this.$emit('handlechangeinputstate',index)
+                // console.log("反馈的的值："+index);
+            }
+        }
+    };
+
+
+    let componentB = {
+        // 组件B模板是两个input标签通过v-if条件渲染，决定那个input标签出现
+        template: `<input disabled v-model="value" v-if="!show"/>
+                   <input v-model="value" v-else/>`,
+        props:['clickindex','index','x'],
+        watch: {
+            x:function(){
+                if (this.index === this.clickindex) {
+                    this.show = !this.show
+                }
+                console.log(this.index)
+                console.log(this.clickindex)
+                console.log("----------------------------")
+            }
+        },
+        data(){
+            return {
+                value: '',
+                show: false
+            }
+        }
+    };
+
+    let app = new Vue({
+        el: '#Box',
+        components:{
+            componentA,
+            componentB
+        },
+        data:{
+            clickindex: '',
+            x: false
+        },
+        methods:{
+            handlechangeinputstate(e){
+                console.log(e);
+                this.clickindex = e;
+                this.x = !this.x
+                // console.log(this.clickindex)
+            }
+        }
+    });
+</script>
+</body>
+
+</html>

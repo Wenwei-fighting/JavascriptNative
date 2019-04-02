@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+#Box{
+    width: 200px;
+    height: auto;
+    border: 1px solid #989898;
+}
+span{
+    display: block;
+    text-indent: 20px;
+    background-color: sandybrown;
+}
+span:hover{
+    background-color: pink;
+}
+ul{
+    list-style: none;
+}
+li{
+    /*height: auto;*/
+    height: 30px;
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+.show{
+    height: auto;
+}
+h3{
+    line-height: 30px;
+    text-indent: 10px;
+    background-color: paleturquoise;
+    cursor: pointer;
+}

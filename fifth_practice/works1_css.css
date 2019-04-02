@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+#Box{
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    top: 200px;
+    margin-left: -250px;
+    /*height: 200px;*/
+    /*width: 500px;*/
+    padding: 10px 15px;
+    border: 1px solid #989898;
+}
+#Box div{
+    border-bottom:1px solid #E0E0E0;
+    line-height: 50px;
+}
+input{
+    width: 300px;
+    border: 0px;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+button{
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid #cccccc;
+    outline: none;
+}
+.unlock{
+    background-color: black;
+    color: white;
+}

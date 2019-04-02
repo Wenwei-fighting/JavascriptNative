@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练手1 Vue实现（优化2）</title>
+    <link rel="stylesheet" href="works1_css.css" type="text/css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="Box">
+        <component-a v-for="( item, index) of 3" :key="index"
+                     :input_show="input_state"
+                     :btn_index="click_index"
+                     :index="index"
+                     @change_inputstate="change_state(index)">
+        </component-a>
+    </div>
+    <script>
+
+        /*
+                最后整体逻辑为：
+
+                组件为：div包裹一个input和一个button
+
+                通过点击button，触发BtnClick_function函数
+
+                        BtnClick_function函数：
+                            更改组件的data中AcitveState的Boolean值，控制button的类名是否出现:class="{ unlock : AcitveState }"，
+                            同时使用三目运算也控制BtnText的赋值{{BtnText = this.AcitveState? "确认" :  "修改"}}，
+                            达到重新渲染，并且通过$emit()触发函数将index传值给父组件this.$emit("change_inputstate")
+
+
+                触发@change_inputstate="change_state(index)"监听事件，
+                执行父组件的change_state(index)函数，
+                此处的index是递归组件中指针v-for="( item, index) of 3"，
+                作为实参传入函数，改变父组件中data的click_index、input_state的值
+
+
+                因为子组件绑定了btn_index、index和input_show这三个变量
+                :input_show="input_state"  :btn_index="click_index"  :index="index"，
+                watch侦听器侦听input_show值，因为input_show值是绑定父组件的input_state，
+                input_state发生改变触发侦听器的方法关于input_show值的函数。
+
+                        侦听器input_show值的函数：
+                            判断index指针值和btn_index是否相同，相同则通过v-if="show"控制条件渲染是否有disabled属性的ipnut
+
+        * */
+
+        let componentA = {
+            template: `<div>
+                          <input type="text" v-model="InputText" disabled v-if="show">
+                          <input type="text" v-model="InputText" v-else>
+                          <button @click="BtnClick_function" ref="btn" :class="{ unlock : AcitveState }">
+                                {{BtnText = this.AcitveState? "确认" :  "修改"}} </button>
+                       </div>`,
+            props: ["btn_index","input_show","index"],
+            data() {
+                return {
+                    show: true,
+                    BtnText : "",
+                    InputText : "",
+                    AcitveState : false
+                }
+            },
+            methods:{
+                BtnClick_function:function () {
+                    this.AcitveState = !this.AcitveState;
+                    this.$emit("change_inputstate");
+                }
+            },
+            watch:{
+                input_show:function () {
+                    if (this.index === this.btn_index)
+                        this.show = !this.show;
+                }
+            }
+        };
+
+        let vm = new Vue({
+            el: "#Box",
+            data:{
+                input_state : true,
+                click_index : ""
+            },
+            components: {
+                componentA : componentA
+            },
+            methods: {
+                change_state:function (Pointer) {
+                    console.log("监听事件");
+                    this.click_index = Pointer;
+                    this.input_state = !this.input_state;
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

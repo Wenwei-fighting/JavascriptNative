@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练手3 Vue原生实现</title>
+    <link rel="stylesheet" href="works3_css.css" type="text/css">
+    <script src="../vue.js"></script>
+</head>
+<!--
+            待解决问题：无法实现当点击当下框时，其他框自动关闭
+
+            解决办法：使用watch侦听器解决，通过在父组件中创立
+            state和currentIndex的变量，数据绑定state变量，
+            在子组件下部署一个侦听器侦听state，每当子组件点击
+            触发监听事件给父组件传此次点击的指针，父组件接收
+            存储此次指针在currentIndex内，并且改变state的值，
+            从而引发递归组件内的每一个侦听器，判断是否是此组件
+            的指针，从而执行相关操作
+
+
+-->
+<body>
+    <div id="Box">
+        <ul id="app">
+            <component-a v-for="(item,index) of list"
+                         :key="index"
+                         :content="item.grouping"
+                         :member-name="item.member"
+                         :grouping-index="index"
+                         :state="state"
+                         @changethis="listenerout">
+            </component-a>
+        </ul>
+    </div>
+    <script>
+
+        let componentB = {
+            props: ["member"],
+            template: `<span>{{member}}</span>`
+        };
+
+        let componentA = {
+            props: ["content","memberName","groupingIndex","state"],
+            template: `<li :class="{ show : isActive }"><h3 @click="groupingShow">{{content}}</h3><component-b v-for="(item,index) of memberName" :key="index" :member="item"></component-b></li>`,
+            components: {
+                componentB : componentB
+            },
+            data(){
+                return{
+                    isActive: false
+                }
+            },
+            methods: {
+                groupingShow: function () {
+                    // this.isActive = !this.isActive;
+                    this.$emit("changethis",this.groupingIndex);
+                }
+            },
+            watch:{
+                state:function () {
+                    // console.log(this.groupingIndex);
+                    // console.log(vm.allindex);
+                    if (this.groupingIndex === vm.currentIndex){
+                        this.isActive = !this.isActive;
+                    }else {
+                        this.isActive = false;
+                    }
+                }
+            }
+        };
+
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                list: [{
+                    grouping: "同事",
+                    member: ["小埋","小红","小明"]
+                },{
+                    grouping: "好友",
+                    member: ["吃货","人才","咸鱼"]
+                },{
+                    grouping: "同学",
+                    member: ["翠花","大傻","超人"]
+                }],
+                state: false,
+                currentIndex: 0
+            },
+            components: {
+                componentA : componentA
+            },
+            methods: {
+                listenerout:function (index) {
+                    // console.log(index);
+                    this.state = !this.state;
+                    this.currentIndex = index;
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

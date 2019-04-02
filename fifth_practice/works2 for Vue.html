@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练手2 Vue原生实现</title>
+    <link rel="stylesheet" href="works2_css.css" type="text/css">
+    <script src="../vue.js"></script>
+</head>
+
+<!--
+            BUG出现：会出现多次点击全部勾选框出现异常，目前暂无解决办法
+
+
+
+
+-->
+
+
+<body>
+<div id="Box">
+    <form action="">
+        <component-a v-for="(item, index) of fruitList"
+                     :key="index"
+                     :content="item.text"
+                     :style="item.background"
+                     :name="name"
+                     :number="number"
+                     :index="index"
+                     v-on:change_inputstate="change_state">
+        </component-a>
+        <div><label><input type="checkbox" :checked="allstate" @click="allCheckbox"/>{{all_text}} </label></div>
+    </form>
+</div>
+<script>
+
+    let componentA = {
+        props:["content","index","name","number"],
+        template:`<div><label><input type="checkbox" :state="click_state" :checked="name" @click="checkBox"/>{{content}}</label></div>`,
+        data(){
+            return{
+                click_state : false
+            }
+        },
+        methods:{
+            checkBox:function () {
+                this.click_state = !this.click_state;
+                this.$emit("change_inputstate",[this.click_state,this.index]);
+            }
+
+        },
+        watch: {
+            number: function () {
+                if (this.number == 6){
+                    vm.allstate = "checked";
+                    this.click_state = true;
+                }else if(this.number == 0){
+                    vm.allstate = "";
+                    this.click_state = false;
+                }else{
+                    vm.allstate = "";
+                }
+            }
+        }
+    };
+
+    let vm = new Vue({
+        el: "#Box",
+        components: {
+            componentA : componentA
+        },
+        data: {
+            number: 0,
+            name: "",
+            all_text: "全部",
+            allstate: "",
+            fruitList:[{
+                text: "苹果",
+                background: {
+                    backgroundColor : "rgb(203,203,203)"
+                }
+            },{
+                text: "桃子",
+                background: {
+                    backgroundColor : "rgb(237,237,237)"
+                }
+            },{
+                text: "香蕉",
+                background: {
+                    backgroundColor : "rgb(152,152,152)"
+                }
+            },{
+                text: "西瓜",
+                background: {
+                    backgroundColor : "rgb(203,203,203)"
+                }
+            },{
+                text: "草莓",
+                background: {
+                    backgroundColor : "rgb(237,237,237)"
+                }
+            },{
+                text: "木瓜",
+                background: {
+                    backgroundColor : "rgb(152,152,152)"
+                }
+            }]
+        },
+        methods: {
+            change_state: function (datalist) {
+                console.log(datalist);
+                if (datalist[0] && (datalist[1]!=6) )
+                    this.number++;
+                else
+                    this.number--;
+                console.log(this.number);
+            },
+            allCheckbox:function () {
+                console.log("number的值"+this.allstate);
+                if (this.allstate == "checked"){
+                    this.name = "";
+                    this.number = 0;
+                    console.log(this.number,this.name);
+                }else {
+                    this.name = "checked";
+                    this.number = 6;
+                    console.log(this.number,this.name);
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
