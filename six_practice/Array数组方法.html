@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Array数组方法</title>
+</head>
+<!--
+        Array.slice(开始指针,结束指针)  ————>  切割数组，从开始位置到结束位置（不包括结束位置）,输出一个新的数组
+        Array.join(转换规则)           ————>  根据转换规则，将数组转换成字符串
+        Array.toString()              ————>   转换成字符串，去掉[]而已
+        Array.splice(指针，数量，元素)  ————>  删除或替换数组中的元素，并返回被删除的元素数组
+        Array.unshift(元素)            ————>  在数组首位添加元素，返回新的长度
+        Array.shift()                 ————>  删除数组首位元素，返回数组被删除元素
+        Array.push(元素)              ————>  在数组末尾添加元素，返回新的长度
+        Array.pop()                   ————>  删除数组末尾元素，返回数组被删除元素
+        Array.length                  ————>  修改数组长度
+        Array.indexOf(元素)           ————>  从数组首位开始寻找元素，并返回指针
+        Array.lastIndexOf(元素)       ————>  从数组末尾开始寻找元素，并返回指针
+-->
+<body>
+    <script>
+        {
+            let list = [1,2,3,4,5];
+            console.log(list.slice(1,3));
+            //输出[2,3]
+            console.log(list.join("哈"));
+            //输出"1哈2哈3哈4哈5"
+            console.log(list.join(""));
+            //输出"12345"
+            console.log(list.join());
+            //输出"1,2,3,4,5"，相当于.toString()方法
+            console.log(list.toString());
+            //输出"1,2,3,4,5"
+        }
+        {
+            let list = ["我","能","行"];
+            console.log(list.splice(1,1),list);
+            //输出数组["能"]和数组["我","行"]，意思是1号位删除1条，不添加任何元素
+            console.log(list.splice(1,0),list);
+            //输出数组[]和数组["我","行"]，意思是1号位删除0条，不添加任何元素
+            console.log(list.splice(1,0,"能"),list);
+            //输出数组[]和数组["我", "能", "行"]，意思是1号位删除0条，并且在1号位后添加"能"
+        }
+        {
+            let list1 = ["只","有","努","力","才","行"];
+            console.log(list1.unshift("我"),list1);
+            //输出数组长度7，数组["我","只","有","努","力","才","行"]
+            console.log(list1.shift(),list1);
+            //输出被删除元素"我"，数组["只","有","努","力","才","行"]
+
+            let list2 = ["我","不","服","输"];
+            console.log(list2.push("!"),list2);
+            //输出数组长度5，数组["我", "不", "服", "输", "!"]
+            console.log(list2.pop(),list2);
+            //输出被删除元素"!"，数组["我", "不", "服", "输"]
+        }
+        {
+            let list = [1,2,3,4,5,6];
+            list.length = 10;
+            console.log(list);
+            //输出数组[1, 2, 3, 4, 5, 6, empty × 4]
+            list.length = 0;
+            console.log(list);
+            //输出数组[]
+        }
+    </script>
+</body>
+</html>

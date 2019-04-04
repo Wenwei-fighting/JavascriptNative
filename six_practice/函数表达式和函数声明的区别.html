@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数表达式和函数声明的区别</title>
+</head>
+<!--
+       函数表达式和函数声明的区别：
+       1、函数表达式可以直接加括号执行
+       2、函数声明会在编译期中直接在全局作用域中创建这个变量，污染顶层对象环境
+          而表达式不会，因为没有名字需要立即执行，或者结合let在块作用域中也不会污染。
+
+-----------------------------------------------------
+
+       函数声明：
+       function fn() {
+           ........
+        }
+
+--------------------------------------------------
+
+        函数表达式：
+        let funcName = function name(){
+           .........
+        }
+
+
+        函数表达式自执行：
+        let funcName = function name(){
+            ..........
+        }()
+
+        或者是
+
+        ！function() {
+            .........
+        }()
+
+
+
+-->
+<body>
+    <script>
+        function fn() {
+            let x = 0;
+            x++;
+            console.log(x);
+        }
+        fn();
+
+        {
+            let funcName = function name(){
+            let y = 0;
+            y++;
+            console.log(y)
+            }();
+        }
+
+
+        !function () {
+            console.log("直接执行");
+        }()
+
+    </script>
+</body>
+</html>

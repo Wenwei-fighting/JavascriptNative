@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>引用型和值类型（基本类型）</title>
+</head>
+<!--
+      引用类型数据：object(除了值类型的其他都是object类型)
+
+      值类型数据：number、Boolean、undefined、null、string
+
+
+      值类型在比较：只比较是否一样
+      引用型在比较：比较内存地址
+
+
+
+-->
+<body>
+    <script>
+        {
+            let obj1 = {a:1},
+                obj2 = {a:1};
+            console.log(obj1 === obj2);
+            //输出false
+
+            let list1 = [1,2,3],
+                list2 = [1,2,3];
+            console.log(list1 === list2);
+            //输出false
+
+            let str1 = "1234",
+                str2 = "1234";
+            console.log(str1 === str2);
+            //输出true
+
+            let udf1 = undefined,
+                udf2 = undefined;
+            console.log(udf1 === udf2);
+            //输出true
+        }
+        {
+            function fn() {
+                console.log(this);
+            }
+
+            let obj = {
+                a : fn
+            };
+
+            let f = obj.a;
+
+            obj.a();
+            //输出obj对象，当前执行环境为obj
+
+            f();
+            //输出window，f获得的地址是通过obj直接获得fn函数的地址，然后f执行的环境是window
+
+            function f2(...a) {
+                arguments[0]();
+                a[0]();
+            }
+            function f3(a) {
+                a();
+            }
+
+            f2(obj.a);
+            //输出arguments对象和array对象，原因是两者是通过将参数填入到两者对象内，然后进行调用，所以调用环境为两者
+            f3(obj.a);
+            //输出window
+        }
+    </script>
+
+</body>
+</html>

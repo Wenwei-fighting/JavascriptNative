@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>字符串方法</title>
+</head>
+<!--
+    string.charAt(指针)                  ————>   获取指定位置的字符串
+    string.concat(字符串)                ————>   拼接字符串
+    string.indexOf(字符串)               ————>   从头开始寻找第一次出现这个字符串的位置
+    string.lastIndexOf(字符串)           ————>   从末尾开始寻找最后一次出现这个字符串的位置
+    string.slice(开始指针,结束指针)       ————>   截取字符串，从开始位到结束位，不包括结束位，结束不填则默认到最后
+    string.substring(开始指针,结束指针)   ————>   与slice()方法相同，只是可以前后可以颠倒，而slice()不行，直接为空
+    string.substr(开始指针,长度)          ————>   截取字符串，从开始位截取对应长度的字符串
+    string.split(切割规则)               ————>   按照切割规则来切割字符串，变成一个数组
+    string.trim()                       ————>    去除字符串前后的空格
+
+
+-->
+<body>
+    <script>
+        {
+            let str = "abcd";
+            console.log(str.charAt(0));
+            //输出"a"，相当于str[0]，但是数组形式不兼容一些浏览器
+        }
+        {
+            let str = "qwer";
+            let other = "asdf";
+            console.log(str.concat(other));
+            //输出"qwerasdf",相当于 str + other
+        }
+        {
+            let str = "xzcv";
+            console.log(str.indexOf("zc"));
+            //输出1
+            console.log(str.indexOf("xv"));
+            //输出-1，因为没找到
+            console.log(str.lastIndexOf("xz"));
+            //输出0
+        }
+        {
+            let str = "哈哈哈哈哈哈想不到吧";
+            console.log(str.slice(6,10));
+            //输出"想不到吧"
+            console.log(str.slice(6));
+            //输出"想不到吧"，因为都是切到最后
+            console.log(str.substring(6,10));
+            //输出"想不到吧"，效果和slice()相同
+            console.log(str.substring(10,6));
+            //输出"想不到吧"，substring()方法前后位置可以倒置写
+            console.log(str.substr(6,4));
+            //输出"想不到吧"，从指针6开始切4个
+        }
+        {
+            let str = "abcdbyeg";
+            console.log(str.split("b"));
+            //输出数组["a","cd","yeg"]
+        }
+        {
+            let str = "   啊哈  想不到吧     ";
+            console.log(str.trim());
+            //输出"啊哈  想不到吧"
+        }
+    </script>
+</body>
+</html>

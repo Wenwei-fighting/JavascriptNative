@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作用域</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .originally{
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+        }
+        .show{
+            background-color: sandybrown;
+        }
+    </style>
+</head>
+<!--
+        classList属性   ————>   不兼容低版本IE
+        对象.classList.add("class1","class2",...,"classN")    添加一个类名或者多个
+        对象.classList.remove("className")                    移除className这个类名
+        对象.classList.toggle("className")                    如果有className这个类名则删除，没有则添加
+        对象.classList.contains("className")                  是否含有className这个类名，并且返回布尔值
+
+---------------------------------------------------------------------------------------------------
+
+        es5:2类
+            全局作用域
+            函数作用域
+
+        es6：新增加块作用域
+
+        无论什么作用域下，只要没有声明就使用赋值的变量，会成为类似全局作用域的存在，
+        没有声明就赋值的变量会泄露，成为顶层、全局window对象的属性
+        !!!注意：避免变量泄露污染window
+
+        window对象属性 ！= 全局变量
+
+        var 和 function 声明的所有变量会成为顶层window对象属性，污染顶层对象的属性环境
+
+        let和const不会污染顶层对象属性环境，但是却可以在全局环境中找到
+
+        let ————> {} ————> 块作用域
+
+        或者使用this指向当前对象
+
+
+
+        变量提升：
+            当你执行代码时，从上往下执行，遇到了变量你还未被声明，但是先用了，后来才声明。
+            代码如下：
+
+            console.log(a);
+            var a = 1;
+            console.log(a);
+
+            而执行结果是undefined和1，所以则是先创建了这个变量同时先赋值undefined，当运行
+            到声明时才会赋值1，但是es6中的let不行，let会产生暂时性死区
+
+
+-->
+<body>
+    <div id="Box" class="originally">哈哈哈</div>
+    <button>add方法</button>
+    <button>remove方法</button>
+    <button>toggle方法</button>
+    <button>contains方法</button>
+
+    <script>
+        let Box = document.getElementById("Box"),
+            BtnList = document.getElementsByTagName("button");
+
+        BtnList[0].onclick = function () {
+            Box.classList.add("show");
+        };
+
+        BtnList[1].onclick = function () {
+            Box.classList.remove("show");
+        };
+
+        BtnList[2].onclick = function () {
+            Box.classList.toggle("show");
+        };
+
+        BtnList[3].onclick = function () {
+            alert(Box.classList.contains("show"));
+        }
+
+    </script>
+
+    <script>
+
+        a = 0;
+
+        var b = 1;
+
+        function c() {
+
+        }
+
+        let d = 3;
+
+        const e = 4;
+
+        console.log(window)
+
+
+    </script>
+
+</body>
+</html>

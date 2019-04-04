@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>arguments和rest的用法</title>
+</head>
+<!--
+
+        arguments 不定参es5
+        格式例如：
+        let fn = function(){
+            console.log(arguments)
+        }
+
+        arguments.callee()的一个特殊用法自身调用
+        let fn = function(){
+            ..........
+            arguments.callee()    ————>  相当于递归，自身调用
+        }
+
+
+---------------------------------------------------------------------
+
+        rest参数  es6新增
+
+        格式例如：
+        let fn = function(...a){
+            console.log(a);
+        }
+
+------------------------------------------------------------------------
+
+        两者区别：
+        1、arguments在严格模式中无法使用
+        2、arguments是代表你所有的形参，而rest不一定如
+
+        let fn = function(a,...b){
+            console.log(b);
+        };
+        fn(1,2,3,4,5)
+        运行结果为[2,3,4,5]
+        ！！！注意：这样写rest参数必须处于最后一个
+
+        3、rest得到的是数组，而arguments得到的是类数组
+
+
+
+
+-->
+<body>
+    <script>
+        let fn1 = function(){
+            console.log(arguments)
+        };
+        fn1(1,2,3,4,5);
+
+
+        let num = 0;
+        let fn2 = function(){
+            num++;
+            console.log(1111);
+            if (num > 5) {
+                return;
+            }
+            console.log(arguments);
+            arguments.callee(num);
+        };
+        fn2(1,2,3,4,5)
+
+    </script>
+    <script>
+
+        let fn3 = function(...a){
+            console.log(a);
+        };
+        fn3(6,7,8,9,10);
+        let fn4 = function(a,...b){
+            console.log(b);
+        };
+        fn4(6,7,8,9,10);
+
+    </script>
+</body>
+</html>
