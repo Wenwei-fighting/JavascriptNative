@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="works1_css.css">
+</head>
+<body>
+    <div id="app">
+        <div id="operationBox">
+            <input type="text" class="input">
+            <input type="button" value="搜索" class="btn">
+            <input type="text" class="input">
+            <input type="button" value="替换" class="btn">
+        </div>
+        <p>湖南，简称“湘”，是中华人民共和国省级行政区。省会长沙，位于中国中部，界于北纬24°38′-30°08′，东经108°47′-114°15′之间，东临江西，西接重庆、贵州，南毗广东、广西，北连湖北，湖南省总面积21.18万平方千米。</p>
+        <p>湖南地处云贵高原向江南丘陵和南岭山脉向江汉平原过渡的地带，地势呈三面环山、朝北开口的马蹄形地貌，由平原、盆地、丘陵地、山地、河湖构成，地跨长江、珠江两大水系，属亚热带季风气候。</p>
+        <p>截至2018年底，湖南省下辖13个省辖市，1个自治州，17个县级市，62个县，7个自治县，36个市辖区。</p>
+        <p>截至2017年末，湖南省常住人口6860.2万人，实现地区生产总值（GDP）34590.6亿元，第一产业3690.0亿元，第二产业14145.5亿元，第三产业16755.1亿元，人均地区生产总值实现50563元。</p>
+    </div>
+
+    <script>
+        let inputList = document.getElementsByClassName("input"),
+            btnList = document.getElementsByClassName("btn"),
+            pList = document.getElementsByTagName("p");
+
+        let text;
+
+        btnList[0].onclick = searchFunction;
+        btnList[1].onclick = replaceFunction;
+
+        function searchFunction() {
+            let search = inputList[0].value.trim();
+            let middleData = [];
+            if (!search){
+                return null;
+            } else {
+                for (let i = 0; i < pList.length; i++) {
+                    text = pList[i].innerText.split(`<span></span>`).join(`""`);
+                    middleData[i] = text.split(search);
+                    // console.log(middleData[i]);
+                    pList[i].innerHTML = middleData[i].join(`<span>${search}</span>`);
+                }
+                // inputList[0].value = "";
+                return middleData;
+            }
+        }
+
+        function replaceFunction() {
+            let replace = inputList[1].value.trim(),
+                receiveData = searchFunction();
+
+            if (receiveData) {
+                for (let i = 0; i < pList.length; i++) {
+                    pList[i].innerHTML = receiveData[i].join(`<span>${replace}</span>`);
+                }
+                // inputList[1].value = "";
+            } else {
+                return
+            }
+        }
+
+    </script>
+</body>
+</html>

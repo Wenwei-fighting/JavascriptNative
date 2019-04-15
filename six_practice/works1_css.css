@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+#app{
+    position: absolute;
+    left: 50%;
+    margin-left: -400px;
+    margin-top: 200px;
+    width: 800px;
+    height: auto;
+    padding: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 7px;
+}
+#operationBox{
+    margin-left: 150px;
+}
+p{
+    text-indent: 25px;
+    margin: 15px 0px;
+}
+input{
+    height: 25px;
+}
+.input{
+    text-indent: 5px;
+}
+.btn{
+    height: 29px;
+    width: 45px;
+}
+span{
+    color: pink;
+    font-weight: bold;
+}

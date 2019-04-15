@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            float: left;
+            list-style: none;
+            height: 100px;
+            width: 100px;
+            line-height: 100px;
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            border: 1px solid #cccccc;
+            cursor: pointer;
+        }
+        #Box{
+            position: relative;
+            left: 50%;
+            margin-left: -200px;
+            top: 200px;
+            width: 408px;
+            height: auto;
+            border: 1px solid #cccccc;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .show{
+            position: relative;
+            height: 120px;
+            background-color: rgb(153,152,154);
+        }
+        span{
+            display: block;
+            height: 50%;
+            padding-right: 10px;
+            line-height: 60px;
+            direction: rtl;
+            font-size: 35px;
+            color: white;
+        }
+        .clear,.zeo{
+            width: 202px;
+        }
+        .calculation{
+            background-color: rgb(255,158,27);
+            color: white;
+        }
+    </style>
+</head>
+<!--
+
+    eval
+-->
+<body>
+    <div id="Box">
+        <div class="show">
+            <span>0</span>
+            <span>0</span>
+        </div>
+        <li class="clear">C</li>
+        <li class="percentage">%</li>
+        <li class="result">=</li>
+        <li class="calculation">÷</li>
+        <li class="number">7</li>
+        <li class="number">8</li>
+        <li class="number">9</li>
+        <li class="calculation">x</li>
+        <li class="number">4</li>
+        <li class="number">5</li>
+        <li class="number">6</li>
+        <li class="calculation">-</li>
+        <li class="number">1</li>
+        <li class="number">2</li>
+        <li class="number">3</li>
+        <li class="calculation">+</li>
+        <li class="number zeo">0</li>
+        <li class="decimal">.</li>
+    </div>
+
+    <script>
+
+    </script>
+
+</body>
+</html>
