@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<!--
+       1、forEach() 方法对数组的每个元素执行一次提供的函数。
+       数组.forEach(callback(element,index可选,array可选))
+
+
+       2、filter() 方法创建一个新数组, 其包含通过所提供函数实现的测试的所有元素。
+       数组.filter(callback(element,index可选,array可选))
+       !!!!注意： 没有办法中止或者跳出 forEach() 循环，除了抛出一个异常。如果你需要这样，使用 forEach() 方法是错误的。
+
+
+       3、isArray()方法判断是否是对象，返回布尔值
+       Array.isArray(数组)
+
+
+       4、find() 方法返回数组中满足提供的测试函数的第一个元素的值。否则返回 undefined。
+       数组.find(callback(element,index可选,array可选))
+
+
+       5、findIndex()方法返回数组中满足提供的测试函数的第一个元素的索引。否则返回-1。
+       数组.findIndex(callback(element,index可选,array可选))
+       参考find()方法
+
+
+       6、map() 方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。
+       数组.map(callback(element,index可选,array可选))
+
+
+       7、some() 方法测试是否至少有一个元素通过由提供的函数实现的测试。就是有一个通过就是返回true
+       数组.some(callback(element,index可选,array可选))
+
+
+       8、sort() 方法用原地算法对数组的元素进行排序，并返回数组。在原数组上操作
+       数组.sort(compareFunction(firstEl,secondEl))
+
+
+       new Array(数组长度)
+
+
+
+-->
+<body>
+    <script>
+        {
+            console.log("数组filter方法");
+            let a = [1,2,3,4,5,6,8,10];
+            //第一种表达方式
+            function f(element) {
+                return element > 3
+            }
+            let b = a.filter(f);
+            console.log(b);
+
+            //第二种表达方式
+            c = a.filter((element) => {
+                return element > 6
+            });
+            console.log(c);
+
+            //典型的使用方法
+            let text = ['apple', 'banana', 'grapes', 'mango', 'orange'];
+            let filterItems = function (query) {
+                //返回一个经过filter过来的数组
+                return text.filter(function (el) {
+                    //数组中的元素转换成小写，寻找query转换成小写后在这个数组中是否存在，存在的所有结果创建新的数组返回
+                    return el.toLowerCase().indexOf(query.toLowerCase()) > -1;
+                })
+            };
+            console.log(filterItems("ap"));
+
+        }
+
+        {
+            console.log("数组forEach方法");
+            let a = [1,2,3,4,5,6,8,10];
+            //第一种用法方式,遍历数组
+            a.forEach((element) => {
+                return console.log(element)
+            });
+            //第二种用法方式，创造副本
+            let b = new Array();
+            a.forEach(function (element) {
+                b.push(element);
+            });
+            console.log(b);
+            //第三种用法，对象复制
+            let copy = function (obj) {
+                //create方法创建一个新的对象，这个对象的原型是形参obj的原型，赋值给copyobj
+                let copyobj = Object.create(Object.getPrototypeOf(obj));
+                //getOwnPropertyNames创建一个数组，里面是形参obj的所有属性名，赋值给propNames
+                let propNames = Object.getOwnPropertyNames(obj);
+
+                propNames.forEach((name) => {
+                    //getOwnPropertyDescriptor创建属性描述符对象，遍历形参obj和其属性，赋值给desc
+                    let desc = Object.getOwnPropertyDescriptor(obj,name);
+                    //往copyobj上定义属性
+                    Object.defineProperty(copyobj,name,desc);
+                });
+
+                return copyobj;
+            };
+
+            let obj1 = { a: 1, b: 2 };
+            let obj2 = copy(obj1);
+            console.log(obj2);
+        }
+
+        {
+            console.log("数组find方法");
+            let a = [1,2,3,4,5,6,8,10];
+            //第一种发达方式
+            let b = function (element) {
+                return element > 5
+            };
+            console.log(a.find(b));
+            //第二种表达方式
+            let c = a.find((element) => {
+                return element > 6
+            });
+            console.log(c);
+            //常见用法:用对象的属性查找数组里的对象
+            let inventory = [
+                {name: 'apples', quantity: 2},
+                {name: 'bananas', quantity: 0},
+                {name: 'cherries', quantity: 5}
+            ];
+
+            function findCherries(fruit) {
+                return fruit.name === 'cherries';
+            }
+            console.log(inventory.find(findCherries));
+        }
+
+        {
+            console.log("数组map方法");
+            let a = [1,2,3,4,5,6,8,10];
+            //第一种发达方式
+            let b = function (element) {
+                return element ** 2
+            };
+            console.log(a.map(b));
+            //第二种表达方式
+            let c = a.map((element) => {
+                return element ** 2
+            });
+            console.log(c);
+            //常见用法：遍历用 querySelectorAll 得到的动态对象集合
+            //获取select下拉选项框被选中的
+            let elems = document.querySelectorAll('select option:checked');
+            let values = Array.prototype.map.call(elems, function(obj) {
+                return obj.value;
+            });
+            console.log(values)
+        }
+
+        {
+            console.log("数组some方法");
+            let a = [1,3,5,6,10];
+            //第一种发达方式
+            let b = function (element) {
+                return element % 2 === 0
+            };
+            console.log(a.some(b));
+            //第二种表达方式
+            let c = a.some((element) => {
+                return element % 4 === 0
+            });
+            console.log(c);
+            //常见用法：判断数组元素中是否存在某个值
+            let fruits = ['apple', 'banana', 'mango', 'guava'];
+
+            function checkAvailability(arr, val) {
+                return arr.some(arrVal => val === arrVal);
+            }
+
+            checkAvailability(fruits, 'kela');
+        }
+
+        {
+            console.log("数组sort方法");
+            let a = [2,1,4,3,10];
+            //第一种发达方式
+            let b = function (x, y) {
+                return x - y;
+            };
+            console.log(a.sort(b));
+            //第二种表达方式
+            let c = a.sort((x, y) => {
+                return y - x;
+            });
+            console.log(c);
+        }
+    </script>
+</body>
+</html>
